@@ -18,6 +18,13 @@ public class Mamifero extends Animal {
         this.numeroPatas = numeroPatas;
     }
     
+    // Agregado: constructor que tambien recibe el consumo diario
+    public Mamifero(String nombre, int edad, double peso, String tipoPelaje, int numeroPatas, double consumoDiario) {
+        super(nombre, edad, peso, consumoDiario);
+        this.tipoPelaje = tipoPelaje;
+        this.numeroPatas = numeroPatas;
+    }
+    
     public Mamifero() {
         super();
         this.tipoPelaje = "Desconocido";
@@ -41,12 +48,16 @@ public class Mamifero extends Animal {
     }
     
     public void mostrarInfo() {
-        System.out.println("=== DATOS DEL MAMÍFERO ===");
+        System.out.println("=== DATOS DEL MAMIFERO ===");
         System.out.println("Nombre: " + getNombre());
         System.out.println("Edad: " + getEdad() + " años");
         System.out.println("Peso: " + getPeso() + " kg");
         System.out.println("Tipo de pelaje: " + tipoPelaje);
-        System.out.println("Número de patas: " + numeroPatas);
+        System.out.println("Numero de patas: " + numeroPatas);
+        // Agregado: muestra el consumo diario si esta definido
+        if (getConsumoDiario() > 0) {
+            System.out.println("Consumo diario: " + getConsumoDiario() + " libras/dia");
+        }
         System.out.println("--------------------------");
     }
 }

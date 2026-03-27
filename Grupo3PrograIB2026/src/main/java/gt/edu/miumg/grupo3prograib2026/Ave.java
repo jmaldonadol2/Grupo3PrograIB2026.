@@ -18,6 +18,13 @@ public class Ave extends Animal {
         this.puedeVolar = puedeVolar;
     }
     
+    // Agregado: constructor que tambien recibe el consumo diario
+    public Ave(String nombre, int edad, double peso, double envergaduraAlas, boolean puedeVolar, double consumoDiario) {
+        super(nombre, edad, peso, consumoDiario);
+        this.envergaduraAlas = envergaduraAlas;
+        this.puedeVolar = puedeVolar;
+    }
+    
     public Ave() {
         super();
         this.envergaduraAlas = 0.0;
@@ -46,7 +53,11 @@ public class Ave extends Animal {
         System.out.println("Edad: " + getEdad() + " años");
         System.out.println("Peso: " + getPeso() + " kg");
         System.out.println("Envergadura de alas: " + envergaduraAlas + " cm");
-        System.out.println("¿Puede volar?: " + (puedeVolar ? "Sí" : "No"));
+        System.out.println("Puede volar?: " + (puedeVolar ? "Si" : "No"));
+        // Agregado: muestra el consumo diario si esta definido
+        if (getConsumoDiario() > 0) {
+            System.out.println("Consumo diario: " + getConsumoDiario() + " libras/dia");
+        }
         System.out.println("---------------------");
     }
 }
