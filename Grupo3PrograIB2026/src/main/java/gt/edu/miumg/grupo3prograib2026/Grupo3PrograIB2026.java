@@ -24,7 +24,7 @@ public class Grupo3PrograIB2026 {
                     System.out.println("  [Fase III - En construccion]");
                     break;
                 case 4:
-                    System.out.println("\n  Gracias por usar el sistema del Zoologico La Aurora."
+                    System.out.println("  Gracias por usar el sistema del Zoologico La Aurora."
                         + "  Hasta pronto! Que tenga un excelente dia.");
                     break;
                 default:
@@ -72,7 +72,7 @@ public class Grupo3PrograIB2026 {
                     System.out.println("  Volviendo al menu principal...");
                     break;
                 default:
-                    System.out.println("\n  Opcion invalida. Intente de nuevo.");
+                    System.out.println("  Opcion invalida. Intente de nuevo.");
             }
         } while (opcion != 3);
     }
