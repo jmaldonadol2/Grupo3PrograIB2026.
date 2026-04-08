@@ -1,6 +1,9 @@
 package gt.edu.miumg.grupo3prograib2026;
 
 import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Grupo3PrograIB2026 {
     private static Mamifero mamifero = null;
@@ -26,6 +29,7 @@ public class Grupo3PrograIB2026 {
                 case 4:
                     System.out.println("  Gracias por usar el sistema del Zoologico La Aurora."
                         + "  Hasta pronto! Que tenga un excelente dia.");
+                    
                     break;
                 default:
                     System.out.println("  Opcion invalida. Intente de nuevo.");
@@ -54,9 +58,8 @@ public class Grupo3PrograIB2026 {
             System.out.println("|-------------------------------------|");
             System.out.println("|  1. Agregar nuevo animal            |");
             System.out.println("|  2. Ver todos los animales del Zoo  |");
-            // Opcion CSV pendiente 
-            // 3. Exportar datos a CSV     
-            System.out.println("|  3. Volver al menu principal        |");
+            System.out.println("|  3. Exportar a CSV                  |");
+            System.out.println("|  4. Volver al menu principal        |");
             System.out.println("|-------------------------------------|");
             opcion = leerEntero("Seleccione una opcion: ");
             switch (opcion) {
@@ -66,9 +69,10 @@ public class Grupo3PrograIB2026 {
                 case 2:
                     verAnimales();
                     break;
-                // case 3 -> exportarCSV()- para la asignacion estaria acá segun las instruciones
-                // Corregir el case siguiente que seria = 4
                 case 3:
+                    exportarCSV();
+                    break;
+                case 4:
                     System.out.println("  Volviendo al menu principal...");
                     break;
                 default:
@@ -171,7 +175,46 @@ public class Grupo3PrograIB2026 {
         if (reptil != null)   reptil.mostrarInfo();
     }
  
-   
+    private static void exportarCSV() {
+     try (BufferedWriter writer = new BufferedWriter(new FileWriter("zoologico.csv"))) {
+
+         // Encabezado
+         writer.write("Tipo,Nombre,Edad,Peso,ConsumoDiario");
+         writer.newLine();
+
+         if (mamifero != null) {
+             writer.write("Mamifero," +
+                     mamifero.getNombre() + "," +
+                     mamifero.getEdad() + "," +
+                     mamifero.getPeso() + "," +
+                     mamifero.getConsumoDiario());
+             writer.newLine();
+         }
+
+         if (ave != null) {
+             writer.write("Ave," +
+                     ave.getNombre() + "," +
+                     ave.getEdad() + "," +
+                     ave.getPeso() + "," +
+                     ave.getConsumoDiario());
+             writer.newLine();
+         }
+
+         if (reptil != null) {
+             writer.write("Reptil," +
+                     reptil.getNombre() + "," +
+                     reptil.getEdad() + "," +
+                     reptil.getPeso() + "," +
+                     reptil.getConsumoDiario());
+             writer.newLine();
+         }
+
+         System.out.println("Datos exportados correctamente a zoologico.csv");
+
+     } catch (IOException e) {
+         System.out.println("Error al exportar los datos: " + e.getMessage());
+     }
+ }
  
     // --- HELPERS DE ENTRADA ---
     private static int leerEntero(String mensaje) {
