@@ -50,36 +50,40 @@ public class Grupo3PrograIB2026 {
     }
  
     // --- MENU ZOO ---
-    private static void menuZoo() {
-        int opcion;
-        do {
-            System.out.println("|-------------------------------------|");
-            System.out.println("|             MENU - ZOO              |");
-            System.out.println("|-------------------------------------|");
-            System.out.println("|  1. Agregar nuevo animal            |");
-            System.out.println("|  2. Ver todos los animales del Zoo  |");
-            System.out.println("|  3. Exportar a CSV                  |");
-            System.out.println("|  4. Volver al menu principal        |");
-            System.out.println("|-------------------------------------|");
-            opcion = leerEntero("Seleccione una opcion: ");
-            switch (opcion) {
-                case 1:
-                    menuAgregarAnimal();
-                    break;
-                case 2:
-                    verAnimales();
-                    break;
-                case 3:
-                    exportarCSV();
-                    break;
-                case 4:
-                    System.out.println("  Volviendo al menu principal...");
-                    break;
-                default:
-                    System.out.println("  Opcion invalida. Intente de nuevo.");
-            }
-        } while (opcion != 3);
-    }
+  private static void menuZoo() {
+    int opcion;
+    do {
+        System.out.println("|-------------------------------------|");
+        System.out.println("|             MENU - ZOO              |");
+        System.out.println("|-------------------------------------|");
+        System.out.println("|  1. Agregar nuevo animal            |");
+        System.out.println("|  2. Ver todos los animales del Zoo  |");
+        System.out.println("|  3. Alimentar animal                |");
+        System.out.println("|  4. Exportar a CSV                  |");
+        System.out.println("|  5. Volver al menu principal        |");
+        System.out.println("|-------------------------------------|");
+        opcion = leerEntero("Seleccione una opcion: ");
+        switch (opcion) {
+            case 1:
+                menuAgregarAnimal();
+                break;
+            case 2:
+                verAnimales();
+                break;
+            case 3:
+                menuAlimentar();  // <-- nuevo
+                break;
+            case 4:
+                exportarCSV();
+                break;
+            case 5:
+                System.out.println("  Volviendo al menu principal...");
+                break;
+            default:
+                System.out.println("  Opcion invalida. Intente de nuevo.");
+        }
+    } while (opcion != 5); 
+}
  
     // --- AGREGAR ANIMAL ---
     private static void menuAgregarAnimal() {
@@ -215,6 +219,53 @@ public class Grupo3PrograIB2026 {
          System.out.println("Error al exportar los datos: " + e.getMessage());
      }
  }
+    private static void menuAlimentar() {
+    System.out.println("|------------------------------|");
+    System.out.println("|       ALIMENTAR ANIMAL       |");
+    System.out.println("|------------------------------|");
+    System.out.println("|  1. Mamifero                 |");
+    System.out.println("|  2. Ave                      |");
+    System.out.println("|  3. Reptil                   |");
+    System.out.println("|------------------------------|");
+    int tipo = leerEntero("Seleccione el tipo: ");
+
+    Animal animal = null;
+    switch (tipo) {
+        case 1:
+            if (mamifero == null) {
+                System.out.println("  No hay mamifero registrado.");
+                return;
+            }
+            animal = mamifero;
+            break;
+        case 2:
+            if (ave == null) {
+                System.out.println("  No hay ave registrada.");
+                return;
+            }
+            animal = ave;
+            break;
+        case 3:
+            if (reptil == null) {
+                System.out.println("  No hay reptil registrado.");
+                return;
+            }
+            animal = reptil;
+            break;
+        default:
+            System.out.println("  Tipo invalido.");
+            return;
+    }
+
+    // Mostrar comportamiento polimórfico
+    System.out.println("\n  " + animal.getNombre() + ": " + animal.alimentarse());
+
+    // Usar recursividad para calcular consumo
+    int dias = leerEntero("  Calcular consumo para cuantos dias? ");
+    double total = animal.calcularConsumoRecursivo(dias);
+    System.out.println("  Consumo diario: " + animal.getConsumoDiario() + " libras/dia");
+    System.out.println("  Consumo total en " + dias + " dias: " + total + " libras");
+}
  
     // --- HELPERS DE ENTRADA ---
     private static int leerEntero(String mensaje) {
