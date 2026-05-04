@@ -10,7 +10,13 @@ public class Grupo3PrograIB2026 {
     private static Ave ave = null;
     private static Reptil reptil = null;
     private static Scanner scanner = new Scanner(System.in);
- 
+    private static Animal[] animales = new Animal[10];
+    private static int totalAnimales = 0;
+    /*Recuerden que al ingresar un animal se sume el contador
+    EJEMPLO:
+    animales[totalAnimales] = new Mamifero(...);
+    totalAnimales++;*/
+    
     public static void main(String[] args) {
         int opcion;
         do {
@@ -21,7 +27,7 @@ public class Grupo3PrograIB2026 {
                     menuZoo();
                     break;
                 case 2:
-                    System.out.println("  [Fase II - En construccion]");
+                    menuArreglosyBusqueda();
                     break;
                 case 3:
                     System.out.println("  [Fase III - En construccion]");
@@ -39,14 +45,14 @@ public class Grupo3PrograIB2026 {
  
     // --- MENU PRINCIPAL ---
     private static void mostrarMenuPrincipal() {
-        System.out.println("|------------------------------|");
-        System.out.println("|ZOOLOGICO LA AURORA - SISTEMA |");
-        System.out.println("|------------------------------|");
-        System.out.println("|  1. Zoo                      |");
-        System.out.println("|  2. Fase II                  |");
-        System.out.println("|  3. Fase III                 |");
-        System.out.println("|  4. Salir                    |");
-        System.out.println("|------------------------------|");
+        System.out.println("|-----------------------------------|");
+        System.out.println("|   ZOOLOGICO LA AURORA - SISTEMA   |");
+        System.out.println("|-----------------------------------|");
+        System.out.println("|  1. Zoo                           |");
+        System.out.println("|  2. Fase II – Arreglos y Búsqueda |");
+        System.out.println("|  3. Fase III                      |");
+        System.out.println("|  4. Salir                         |");
+        System.out.println("|-----------------------------------|");
     }
  
     // --- MENU ZOO ---
@@ -83,7 +89,59 @@ public class Grupo3PrograIB2026 {
                 System.out.println("  Opcion invalida. Intente de nuevo.");
         }
     } while (opcion != 5); 
-}
+ }
+  
+    // Menú Arreglos y busqueda
+    private static void menuArreglosyBusqueda(){
+        char opcion;
+        do {
+            System.out.println("|---------------------------------------|");
+            System.out.println("|     Fase 2 – Arreglos y Búsqueda      |");
+            System.out.println("|---------------------------------------|");
+            System.out.println("|  a. Agregar Mamífero                  |");
+            System.out.println("|  b. Agregar Ave                       |");
+            System.out.println("|  c. Agregar Reptil                    |");
+            System.out.println("|  d. Buscar animal por identificador   |");
+            System.out.println("|  e. Buscar animal por nombre          |");
+            System.out.println("|  f. Ordenar arreglo por identificador |");
+            System.out.println("|  g. Mostrar todos los animales        |");
+            System.out.println("|  h. Mostrar estadísticas              |");
+            System.out.println("|  i. Volver al menu principal          |");
+            System.out.println("|---------------------------------------|");
+            opcion = leerLetra("Seleccione una opcion: ");
+            switch (opcion) {
+                case 'a':
+                    //a. Agregar Mamífero
+                    break;
+                case 'b':
+                    //b. Agregar Ave 
+                    break;
+                case 'c':
+                      //c. Agregar Reptil
+                    break;
+                case 'd':
+                    //d. Buscar animal por identificador
+                    break;
+                case 'e':
+                    //e. Buscar animal por nombre
+                    break;
+                case 'f':
+                    //f. Ordenar arreglo por identificador
+                    break;
+                case 'g':
+                    //g. Mostrar todos los animales
+                    break;
+                case 'h':
+                    //h. Mostrar estadísticas
+                    break;
+                case 'i':
+                    //i. Volver al menu principal
+                    break;
+                default:
+                    System.out.println("  Opcion invalida. Intente de nuevo.");
+            }
+        } while (opcion != 'i');
+    }
  
     // --- AGREGAR ANIMAL ---
     private static void menuAgregarAnimal() {
@@ -288,6 +346,22 @@ public class Grupo3PrograIB2026 {
                 System.out.println("  Ingrese un numero decimal valido.");
             }
         }
+    }
+    
+    public static char leerLetra(String mensaje) {
+        char letra = ' ';
+        boolean valido = false;
+        while (!valido) {
+            System.out.print(mensaje);
+            String entrada = scanner.nextLine().trim().toLowerCase(); // ← usar scanner de clase
+            if (entrada.length() == 1 && entrada.charAt(0) >= 'a' && entrada.charAt(0) <= 'i') {
+                letra = entrada.charAt(0);
+                valido = true;
+            } else {
+                System.out.println("Opción inválida. Ingrese una letra entre a y la i.");
+            }
+        }
+        return letra;
     }
  
     private static String leerTexto(String mensaje) {
