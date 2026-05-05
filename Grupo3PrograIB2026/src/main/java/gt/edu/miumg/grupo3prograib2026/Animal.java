@@ -37,7 +37,7 @@ public abstract class Animal {
         }
         System.out.println("---------------------");
     }
-
+//RECURSIVIDAD
     public double calcularConsumoRecursivo(int dias) {
         if (dias <= 0) return 0;
         return consumoDiario + calcularConsumoRecursivo(dias - 1);
