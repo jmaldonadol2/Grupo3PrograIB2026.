@@ -1,20 +1,26 @@
 package gt.edu.miumg.grupo3prograib2026;
 
 public abstract class Animal {
+    private static int contadorGlobalId = 0;
+    private int idAnimal;
     private String nombre;
     private int edad;
     private double peso;
     private double consumoDiario;
 
-    public Animal() {}
+    public Animal() {
+        this.idAnimal = ++contadorGlobalId;
+    }
 
     public Animal(String nombre, int edad, double peso) {
+        this.idAnimal = ++contadorGlobalId;
         this.nombre = nombre;
         this.edad = edad;
         this.peso = peso;
     }
 
     public Animal(String nombre, int edad, double peso, double consumoDiario) {
+        this.idAnimal = ++contadorGlobalId;
         this.nombre = nombre;
         this.edad = edad;
         this.peso = peso;
@@ -22,6 +28,15 @@ public abstract class Animal {
     }
 
     // getters/setters (igual que ya los tienes)...
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public int getEdad() { return edad; }
+    public void setEdad(int edad) { this.edad = edad; }
+    public double getPeso() { return peso; }
+    public void setPeso(double peso) { this.peso = peso; }
+    public double getConsumoDiario() { return consumoDiario; }
+    public void setConsumoDiario(double consumoDiario) { this.consumoDiario = consumoDiario; }
+    public int getIdAnimal() { return idAnimal; }
 
     public abstract String emitirSonido();
     public abstract String moverse();
@@ -29,6 +44,7 @@ public abstract class Animal {
 
     public void mostrarInfo() {
         System.out.println("=== DATOS DEL ANIMAL ===");
+        System.out.println("ID: " + idAnimal);
         System.out.println("Nombre: " + getNombre());
         System.out.println("Edad: " + getEdad() + " años");
         System.out.println("Peso: " + getPeso() + " kg");
@@ -53,14 +69,4 @@ public abstract class Animal {
         System.out.println("  -> Retorna " + consumoDiario + " + consumo(" + (dias - 1) + ") = " + resultado);
         return resultado;
     }
-
-    // getters y setters (asegúrate de mantenerlos)
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public int getEdad() { return edad; }
-    public void setEdad(int edad) { this.edad = edad; }
-    public double getPeso() { return peso; }
-    public void setPeso(double peso) { this.peso = peso; }
-    public double getConsumoDiario() { return consumoDiario; }
-    public void setConsumoDiario(double consumoDiario) { this.consumoDiario = consumoDiario; }
 }

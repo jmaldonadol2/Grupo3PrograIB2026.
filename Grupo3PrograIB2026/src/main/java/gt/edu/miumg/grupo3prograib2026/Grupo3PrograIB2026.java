@@ -32,7 +32,6 @@ public class Grupo3PrograIB2026 {
                 case 4:
                     System.out.println("  Gracias por usar el sistema del Zoologico La Aurora."
                         + "  Hasta pronto! Que tenga un excelente dia.");
-                    
                     break;
                 default:
                     System.out.println("  Opcion invalida. Intente de nuevo.");
@@ -88,8 +87,8 @@ public class Grupo3PrograIB2026 {
         } while (opcion != 5); 
     }
   
-    // Menú Arreglos y busqueda
-    private static void menuArreglosyBusqueda(){
+    // --- MENU ARREGLOS Y BUSQUEDA (FASE II) ---
+    private static void menuArreglosyBusqueda() {
         char opcion;
         do {
             System.out.println("|---------------------------------------|");
@@ -106,27 +105,28 @@ public class Grupo3PrograIB2026 {
             System.out.println("|  i. Volver al menu principal          |");
             System.out.println("|---------------------------------------|");
             opcion = leerLetra("Seleccione una opcion: ");
+            
             switch (opcion) {
                 case 'a':
-                    //a. Agregar Mamífero
+                    agregarMamiferoAlArreglo();
                     break;
                 case 'b':
-                    //b. Agregar Ave 
+                    agregarAveAlArreglo();
                     break;
                 case 'c':
-                    //c. Agregar Reptil
+                    agregarReptilAlArreglo();
                     break;
                 case 'd':
-                    //d. Buscar animal por identificador
+                    buscarAnimalPorId();
                     break;
                 case 'e':
-                    //e. Buscar animal por nombre
+                    buscarAnimalPorNombre();
                     break;
                 case 'f':
-                    //f. Ordenar arreglo por identificador
+                    ordenarArregloPorId();
                     break;
                 case 'g':
-                    //g. Mostrar todos los animales
+                    mostrarTodosLosAnimales();
                     break;
                 case 'h':
                     mostrarEstadisticas();
@@ -140,7 +140,249 @@ public class Grupo3PrograIB2026 {
         } while (opcion != 'i');
     }
  
-    // --- AGREGAR ANIMAL ---
+    // ============ AGREGAR ANIMALES AL ARREGLO ============
+    
+    private static void agregarMamiferoAlArreglo() {
+        if (totalAnimales >= animales.length) {
+            System.out.println("  No hay espacio para más animales. Límite: " + animales.length);
+            return;
+        }
+        
+        System.out.println("-- Registro de Mamífero --");
+        String nombre = leerTexto("Nombre: ");
+        int edad = leerEntero("Edad (años): ");
+        double peso = leerDecimal("Peso (kg): ");
+        String pelaje = leerTexto("Tipo de pelaje: ");
+        int patas = leerEntero("Número de patas: ");
+        double consumo = leerDecimal("Consumo diario (libras/dia): ");
+        
+        Mamifero nuevo = new Mamifero(nombre, edad, peso, pelaje, patas, consumo);
+        animales[totalAnimales] = nuevo;
+        totalAnimales++;
+        
+        System.out.println("  Mamífero registrado exitosamente! ID: " + nuevo.getIdAnimal());
+        nuevo.mostrarInfo();
+    }
+    
+    private static void agregarAveAlArreglo() {
+        if (totalAnimales >= animales.length) {
+            System.out.println("  No hay espacio para más animales. Límite: " + animales.length);
+            return;
+        }
+        
+        System.out.println("-- Registro de Ave --");
+        String nombre = leerTexto("Nombre: ");
+        int edad = leerEntero("Edad (años): ");
+        double peso = leerDecimal("Peso (kg): ");
+        double envergadura = leerDecimal("Envergadura de alas (cm): ");
+        boolean vuela = leerBooleano("Puede volar? (s/n): ");
+        double consumo = leerDecimal("Consumo diario (libras/dia): ");
+        
+        Ave nuevo = new Ave(nombre, edad, peso, envergadura, vuela, consumo);
+        animales[totalAnimales] = nuevo;
+        totalAnimales++;
+        
+        System.out.println("  Ave registrada exitosamente! ID: " + nuevo.getIdAnimal());
+        nuevo.mostrarInfo();
+    }
+    
+    private static void agregarReptilAlArreglo() {
+        if (totalAnimales >= animales.length) {
+            System.out.println("  No hay espacio para más animales. Límite: " + animales.length);
+            return;
+        }
+        
+        System.out.println("-- Registro de Reptil --");
+        String nombre = leerTexto("Nombre: ");
+        int edad = leerEntero("Edad (años): ");
+        double peso = leerDecimal("Peso (kg): ");
+        String escamas = leerTexto("Tipo de escamas: ");
+        boolean venenoso = leerBooleano("Es venenoso? (s/n): ");
+        double consumo = leerDecimal("Consumo diario (libras/dia): ");
+        
+        Reptil nuevo = new Reptil(nombre, edad, peso, escamas, venenoso, consumo);
+        animales[totalAnimales] = nuevo;
+        totalAnimales++;
+        
+        System.out.println("  Reptil registrado exitosamente! ID: " + nuevo.getIdAnimal());
+        nuevo.mostrarInfo();
+    }
+    
+    // ============ BÚSQUEDAS ============
+    
+    private static void buscarAnimalPorId() {
+        if (totalAnimales == 0) {
+            System.out.println("  No hay animales registrados.");
+            return;
+        }
+        
+        int idBuscado = leerEntero("Ingrese el ID del animal a buscar: ");
+        
+        for (int i = 0; i < totalAnimales; i++) {
+            if (animales[i].getIdAnimal() == idBuscado) {
+                System.out.println("\n  Animal encontrado:");
+                animales[i].mostrarInfo();
+                return;
+            }
+        }
+        
+        System.out.println("  No se encontró ningún animal con ID: " + idBuscado);
+    }
+    
+    private static void buscarAnimalPorNombre() {
+        if (totalAnimales == 0) {
+            System.out.println("  No hay animales registrados.");
+            return;
+        }
+        
+        String nombreBuscado = leerTexto("Ingrese el nombre del animal a buscar: ").toLowerCase();
+        int coincidencias = 0;
+        
+        for (int i = 0; i < totalAnimales; i++) {
+            if (animales[i].getNombre().toLowerCase().equals(nombreBuscado)) {
+                System.out.println("\n  Animal encontrado:");
+                animales[i].mostrarInfo();
+                coincidencias++;
+            }
+        }
+        
+        if (coincidencias == 0) {
+            System.out.println("  No se encontró ningún animal con nombre: " + nombreBuscado);
+        } else {
+            System.out.println("  Total de coincidencias: " + coincidencias);
+        }
+    }
+    
+    // ============ ORDENAMIENTO ============
+    
+    private static void ordenarArregloPorId() {
+        if (totalAnimales == 0) {
+            System.out.println("  No hay animales para ordenar.");
+            return;
+        }
+        
+        System.out.println("  ¿Cómo desea ordenar?");
+        System.out.println("  1. Ascendente (menor a mayor ID)");
+        System.out.println("  2. Descendente (mayor a menor ID)");
+        int opcionOrden = leerEntero("Seleccione: ");
+        
+        for (int i = 0; i < totalAnimales - 1; i++) {
+            for (int j = 0; j < totalAnimales - i - 1; j++) {
+                boolean debeIntercambiar;
+                
+                if (opcionOrden == 1) {
+                    debeIntercambiar = animales[j].getIdAnimal() > animales[j + 1].getIdAnimal();
+                } else {
+                    debeIntercambiar = animales[j].getIdAnimal() < animales[j + 1].getIdAnimal();
+                }
+                
+                if (debeIntercambiar) {
+                    Animal temp = animales[j];
+                    animales[j] = animales[j + 1];
+                    animales[j + 1] = temp;
+                }
+            }
+        }
+        
+        String tipoOrden = (opcionOrden == 1) ? "ascendente" : "descendente";
+        System.out.println("  Arreglo ordenado de forma " + tipoOrden + " por ID.");
+        mostrarTodosLosAnimales();
+    }
+    
+    // ============ MOSTRAR TODOS LOS ANIMALES ============
+    
+    private static void mostrarTodosLosAnimales() {
+        if (totalAnimales == 0) {
+            System.out.println("  No hay animales registrados.");
+            return;
+        }
+        
+        System.out.println("\n========== LISTA DE ANIMALES (Total: " + totalAnimales + ") ==========");
+        for (int i = 0; i < totalAnimales; i++) {
+            System.out.println("[" + (i + 1) + "] ID: " + animales[i].getIdAnimal() + " - " + animales[i].getNombre());
+            animales[i].mostrarInfo();
+            System.out.println();
+        }
+    }
+    
+    // ============ ESTADÍSTICAS ============
+    
+    private static void mostrarEstadisticas() {
+        if (totalAnimales == 0) {
+            System.out.println("\n  No hay animales registrados aun.\n");
+            return;
+        }
+
+        System.out.println("\n========== ESTADÍSTICAS DEL ZOO ==========");
+        System.out.println("Cantidad total de animales registrados: " + totalAnimales);
+        System.out.println("Cantidad de mamíferos: " + contarPorTipo("Mamifero"));
+        System.out.println("Cantidad de aves: " + contarPorTipo("Ave"));
+        System.out.println("Cantidad de reptiles: " + contarPorTipo("Reptil"));
+        
+        Animal animalMayorConsumo = animalConMayorConsumo();
+        if (animalMayorConsumo != null) {
+            System.out.println("Animal con mayor consumo de alimento: " + animalMayorConsumo.getNombre());
+        }
+        
+        Animal animalMenorConsumo = animalConMenorConsumo();
+        if (animalMenorConsumo != null) {
+            System.out.println("Animal con menor consumo de alimento: " + animalMenorConsumo.getNombre());
+        }
+        
+        double promedioEdad = calcularPromedioEdad();
+        System.out.println("Promedio de edad de los animales registrados: " + String.format("%.2f", promedioEdad));
+        System.out.println("==========================================\n");
+    }
+    
+    private static int contarPorTipo(String tipo) {
+        int contador = 0;
+        for (int i = 0; i < totalAnimales; i++) {
+            if (animales[i] instanceof Mamifero && tipo.equals("Mamifero")) {
+                contador++;
+            } else if (animales[i] instanceof Ave && tipo.equals("Ave")) {
+                contador++;
+            } else if (animales[i] instanceof Reptil && tipo.equals("Reptil")) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+    
+    private static Animal animalConMayorConsumo() {
+        if (totalAnimales == 0) return null;
+        
+        Animal mayor = animales[0];
+        for (int i = 1; i < totalAnimales; i++) {
+            if (animales[i].getConsumoDiario() > mayor.getConsumoDiario()) {
+                mayor = animales[i];
+            }
+        }
+        return mayor;
+    }
+    
+    private static Animal animalConMenorConsumo() {
+        if (totalAnimales == 0) return null;
+        
+        Animal menor = animales[0];
+        for (int i = 1; i < totalAnimales; i++) {
+            if (animales[i].getConsumoDiario() < menor.getConsumoDiario()) {
+                menor = animales[i];
+            }
+        }
+        return menor;
+    }
+    
+    private static double calcularPromedioEdad() {
+        if (totalAnimales == 0) return 0;
+        
+        double sumaEdades = 0;
+        for (int i = 0; i < totalAnimales; i++) {
+            sumaEdades += animales[i].getEdad();
+        }
+        return sumaEdades / totalAnimales;
+    }
+ 
+    // --- AGREGAR ANIMAL (Viejo, mantiene compatibilidad) ---
     private static void menuAgregarAnimal() {
         System.out.println("|------------------------------|");
         System.out.println("|     AGREGAR NUEVO ANIMAL     |");
@@ -228,7 +470,7 @@ public class Grupo3PrograIB2026 {
         reptil.mostrarInfo();
     }
  
-    // --- VER ANIMALES ---
+    // --- VER ANIMALES (Viejo) ---
     private static void verAnimales() {
         System.out.println("====== ANIMALES EN EL ZOOLOGICO ======");
         if (mamifero == null && ave == null && reptil == null) {
@@ -242,45 +484,26 @@ public class Grupo3PrograIB2026 {
  
     private static void exportarCSV() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("zoologico.csv"))) {
-
-            // Encabezado
             writer.write("Tipo,Nombre,Edad,Peso,ConsumoDiario");
             writer.newLine();
-
             if (mamifero != null) {
-                writer.write("Mamifero," +
-                        mamifero.getNombre() + "," +
-                        mamifero.getEdad() + "," +
-                        mamifero.getPeso() + "," +
-                        mamifero.getConsumoDiario());
+                writer.write("Mamifero," + mamifero.getNombre() + "," + mamifero.getEdad() + "," + mamifero.getPeso() + "," + mamifero.getConsumoDiario());
                 writer.newLine();
             }
-
             if (ave != null) {
-                writer.write("Ave," +
-                        ave.getNombre() + "," +
-                        ave.getEdad() + "," +
-                        ave.getPeso() + "," +
-                        ave.getConsumoDiario());
+                writer.write("Ave," + ave.getNombre() + "," + ave.getEdad() + "," + ave.getPeso() + "," + ave.getConsumoDiario());
                 writer.newLine();
             }
-
             if (reptil != null) {
-                writer.write("Reptil," +
-                        reptil.getNombre() + "," +
-                        reptil.getEdad() + "," +
-                        reptil.getPeso() + "," +
-                        reptil.getConsumoDiario());
+                writer.write("Reptil," + reptil.getNombre() + "," + reptil.getEdad() + "," + reptil.getPeso() + "," + reptil.getConsumoDiario());
                 writer.newLine();
             }
-
             System.out.println("Datos exportados correctamente a zoologico.csv");
-
         } catch (IOException e) {
             System.out.println("Error al exportar los datos: " + e.getMessage());
         }
     }
-
+ 
     private static void menuAlimentar() {
         System.out.println("|------------------------------|");
         System.out.println("|       ALIMENTAR ANIMAL       |");
@@ -290,7 +513,6 @@ public class Grupo3PrograIB2026 {
         System.out.println("|  3. Reptil                   |");
         System.out.println("|------------------------------|");
         int tipo = leerEntero("Seleccione el tipo: ");
-
         Animal animal = null;
         switch (tipo) {
             case 1:
@@ -318,89 +540,11 @@ public class Grupo3PrograIB2026 {
                 System.out.println("  Tipo invalido.");
                 return;
         }
-
         System.out.println("\n  " + animal.getNombre() + ": " + animal.alimentarse());
-
         int dias = leerEntero("  Calcular consumo para cuantos dias? ");
         double total = animal.calcularConsumoRecursivo(dias);
         System.out.println("  Consumo diario: " + animal.getConsumoDiario() + " libras/dia");
         System.out.println("  Consumo total en " + dias + " dias: " + total + " libras");
-    }
-
-    // --- OPCIÓN H: MOSTRAR ESTADÍSTICAS ---
-    private static void mostrarEstadisticas() {
-        if (totalAnimales == 0) {
-            System.out.println("\n  No hay animales registrados aun.\n");
-            return;
-        }
-
-        System.out.println("\n========== ESTADÍSTICAS DEL ZOO ==========");
-        System.out.println("Cantidad total de animales registrados: " + totalAnimales);
-        System.out.println("Cantidad de mamíferos: " + contarPorTipo("Mamifero"));
-        System.out.println("Cantidad de aves: " + contarPorTipo("Ave"));
-        System.out.println("Cantidad de reptiles: " + contarPorTipo("Reptil"));
-        
-        Animal animalMayorConsumo = animalConMayorConsumo();
-        if (animalMayorConsumo != null) {
-            System.out.println("Animal con mayor consumo de alimento: " + animalMayorConsumo.getNombre());
-        }
-        
-        Animal animalMenorConsumo = animalConMenorConsumo();
-        if (animalMenorConsumo != null) {
-            System.out.println("Animal con menor consumo de alimento: " + animalMenorConsumo.getNombre());
-        }
-        
-        double promedioEdad = calcularPromedioEdad();
-        System.out.println("Promedio de edad de los animales registrados: " + String.format("%.2f", promedioEdad));
-        System.out.println("==========================================\n");
-    }
-
-    private static int contarPorTipo(String tipo) {
-        int contador = 0;
-        for (int i = 0; i < totalAnimales; i++) {
-            if (animales[i] instanceof Mamifero && tipo.equals("Mamifero")) {
-                contador++;
-            } else if (animales[i] instanceof Ave && tipo.equals("Ave")) {
-                contador++;
-            } else if (animales[i] instanceof Reptil && tipo.equals("Reptil")) {
-                contador++;
-            }
-        }
-        return contador;
-    }
-
-    private static Animal animalConMayorConsumo() {
-        if (totalAnimales == 0) return null;
-        
-        Animal mayor = animales[0];
-        for (int i = 1; i < totalAnimales; i++) {
-            if (animales[i].getConsumoDiario() > mayor.getConsumoDiario()) {
-                mayor = animales[i];
-            }
-        }
-        return mayor;
-    }
-
-    private static Animal animalConMenorConsumo() {
-        if (totalAnimales == 0) return null;
-        
-        Animal menor = animales[0];
-        for (int i = 1; i < totalAnimales; i++) {
-            if (animales[i].getConsumoDiario() < menor.getConsumoDiario()) {
-                menor = animales[i];
-            }
-        }
-        return menor;
-    }
-
-    private static double calcularPromedioEdad() {
-        if (totalAnimales == 0) return 0;
-        
-        double sumaEdades = 0;
-        for (int i = 0; i < totalAnimales; i++) {
-            sumaEdades += animales[i].getEdad();
-        }
-        return sumaEdades / totalAnimales;
     }
  
     // --- HELPERS DE ENTRADA ---
