@@ -139,12 +139,23 @@ public class Grupo3PrograIB2026 {
             }
         } while (opcion != 'i');
     }
- 
-    // ============ AGREGAR ANIMALES AL ARREGLO ============
+    
+    // ============ VALIDACIÓN DE IDENTIFICADOR REPETIDO ============
+    private static boolean existeIdAnimal(int idBuscado) {
+        for (int i = 0; i < totalAnimales; i++) {
+            if (animales[i].getIdAnimal() == idBuscado) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    // ============ AGREGAR ANIMALES AL ARREGLO (FASE II) ============
     
     private static void agregarMamiferoAlArreglo() {
         if (totalAnimales >= animales.length) {
-            System.out.println("  No hay espacio para más animales. Límite: " + animales.length);
+            System.out.println("  ❌ El Zoo ya está lleno");
+            System.out.println("  Capacidad máxima alcanzada: " + animales.length + " animales");
             return;
         }
         
@@ -157,16 +168,25 @@ public class Grupo3PrograIB2026 {
         double consumo = leerDecimal("Consumo diario (libras/dia): ");
         
         Mamifero nuevo = new Mamifero(nombre, edad, peso, pelaje, patas, consumo);
+        
+        if (existeIdAnimal(nuevo.getIdAnimal())) {
+            System.out.println("  ❌ El identificador es único para cada animal");
+            System.out.println("  El ID " + nuevo.getIdAnimal() + " ya existe. Intente de nuevo.");
+            agregarMamiferoAlArreglo();
+            return;
+        }
+        
         animales[totalAnimales] = nuevo;
         totalAnimales++;
         
-        System.out.println("  Mamífero registrado exitosamente! ID: " + nuevo.getIdAnimal());
+        System.out.println("  ✓ Mamífero registrado exitosamente! ID: " + nuevo.getIdAnimal());
         nuevo.mostrarInfo();
     }
     
     private static void agregarAveAlArreglo() {
         if (totalAnimales >= animales.length) {
-            System.out.println("  No hay espacio para más animales. Límite: " + animales.length);
+            System.out.println("  ❌ El Zoo ya está lleno");
+            System.out.println("  Capacidad máxima alcanzada: " + animales.length + " animales");
             return;
         }
         
@@ -179,16 +199,25 @@ public class Grupo3PrograIB2026 {
         double consumo = leerDecimal("Consumo diario (libras/dia): ");
         
         Ave nuevo = new Ave(nombre, edad, peso, envergadura, vuela, consumo);
+        
+        if (existeIdAnimal(nuevo.getIdAnimal())) {
+            System.out.println("  ❌ El identificador es único para cada animal");
+            System.out.println("  El ID " + nuevo.getIdAnimal() + " ya existe. Intente de nuevo.");
+            agregarAveAlArreglo();
+            return;
+        }
+        
         animales[totalAnimales] = nuevo;
         totalAnimales++;
         
-        System.out.println("  Ave registrada exitosamente! ID: " + nuevo.getIdAnimal());
+        System.out.println("  ✓ Ave registrada exitosamente! ID: " + nuevo.getIdAnimal());
         nuevo.mostrarInfo();
     }
     
     private static void agregarReptilAlArreglo() {
         if (totalAnimales >= animales.length) {
-            System.out.println("  No hay espacio para más animales. Límite: " + animales.length);
+            System.out.println("  ❌ El Zoo ya está lleno");
+            System.out.println("  Capacidad máxima alcanzada: " + animales.length + " animales");
             return;
         }
         
@@ -201,10 +230,18 @@ public class Grupo3PrograIB2026 {
         double consumo = leerDecimal("Consumo diario (libras/dia): ");
         
         Reptil nuevo = new Reptil(nombre, edad, peso, escamas, venenoso, consumo);
+        
+        if (existeIdAnimal(nuevo.getIdAnimal())) {
+            System.out.println("  ❌ El identificador es único para cada animal");
+            System.out.println("  El ID " + nuevo.getIdAnimal() + " ya existe. Intente de nuevo.");
+            agregarReptilAlArreglo();
+            return;
+        }
+        
         animales[totalAnimales] = nuevo;
         totalAnimales++;
         
-        System.out.println("  Reptil registrado exitosamente! ID: " + nuevo.getIdAnimal());
+        System.out.println("  ✓ Reptil registrado exitosamente! ID: " + nuevo.getIdAnimal());
         nuevo.mostrarInfo();
     }
     
@@ -315,6 +352,7 @@ public class Grupo3PrograIB2026 {
 
         System.out.println("\n========== ESTADÍSTICAS DEL ZOO ==========");
         System.out.println("Cantidad total de animales registrados: " + totalAnimales);
+        System.out.println("Capacidad disponible: " + (animales.length - totalAnimales) + " espacios");
         System.out.println("Cantidad de mamíferos: " + contarPorTipo("Mamifero"));
         System.out.println("Cantidad de aves: " + contarPorTipo("Ave"));
         System.out.println("Cantidad de reptiles: " + contarPorTipo("Reptil"));
@@ -382,7 +420,7 @@ public class Grupo3PrograIB2026 {
         return sumaEdades / totalAnimales;
     }
  
-    // --- AGREGAR ANIMAL (Viejo, mantiene compatibilidad) ---
+    // --- AGREGAR ANIMAL (FASE I - Viejo, CON VALIDACIONES) ---
     private static void menuAgregarAnimal() {
         System.out.println("|------------------------------|");
         System.out.println("|     AGREGAR NUEVO ANIMAL     |");
@@ -408,6 +446,12 @@ public class Grupo3PrograIB2026 {
     }
  
     private static void registrarMamifero() {
+        if (totalAnimales >= animales.length) {
+            System.out.println("  ❌ El Zoo ya está lleno");
+            System.out.println("  Capacidad máxima alcanzada: " + animales.length + " animales");
+            return;
+        }
+        
         if (mamifero != null) {
             System.out.println("  Ya existe un mamifero registrado: " + mamifero.getNombre()
                     + ". Solo se permite uno por tipo.\n");
@@ -422,13 +466,28 @@ public class Grupo3PrograIB2026 {
         double consumo = leerDecimal("Consumo diario (libras/dia): ");
  
         mamifero = new Mamifero(nombre, edad, peso, pelaje, patas, consumo);
+        
+        if (existeIdAnimal(mamifero.getIdAnimal())) {
+            System.out.println("  ❌ El identificador es único para cada animal");
+            System.out.println("  El ID " + mamifero.getIdAnimal() + " ya existe. Intente de nuevo.");
+            mamifero = null;
+            registrarMamifero();
+            return;
+        }
+        
         animales[totalAnimales] = mamifero;
         totalAnimales++;
-        System.out.println("  Mamifero registrado exitosamente!");
+        System.out.println("  ✓ Mamifero registrado exitosamente!");
         mamifero.mostrarInfo();
     }
  
     private static void registrarAve() {
+        if (totalAnimales >= animales.length) {
+            System.out.println("  ❌ El Zoo ya está lleno");
+            System.out.println("  Capacidad máxima alcanzada: " + animales.length + " animales");
+            return;
+        }
+        
         if (ave != null) {
             System.out.println("  Ya existe un ave registrada: " + ave.getNombre()
                     + ". Solo se permite una por tipo.");
@@ -443,13 +502,28 @@ public class Grupo3PrograIB2026 {
         double consumo = leerDecimal("Consumo diario (libras/dia): ");
  
         ave = new Ave(nombre, edad, peso, envergadura, vuela, consumo);
+        
+        if (existeIdAnimal(ave.getIdAnimal())) {
+            System.out.println("  ❌ El identificador es único para cada animal");
+            System.out.println("  El ID " + ave.getIdAnimal() + " ya existe. Intente de nuevo.");
+            ave = null;
+            registrarAve();
+            return;
+        }
+        
         animales[totalAnimales] = ave;
         totalAnimales++;
-        System.out.println("  Ave registrada exitosamente!");
+        System.out.println("  ✓ Ave registrada exitosamente!");
         ave.mostrarInfo();
     }
  
     private static void registrarReptil() {
+        if (totalAnimales >= animales.length) {
+            System.out.println("  ❌ El Zoo ya está lleno");
+            System.out.println("  Capacidad máxima alcanzada: " + animales.length + " animales");
+            return;
+        }
+        
         if (reptil != null) {
             System.out.println("  Ya existe un reptil registrado: " + reptil.getNombre()
                     + ". Solo se permite uno por tipo.\n");
@@ -464,13 +538,22 @@ public class Grupo3PrograIB2026 {
         double consumo = leerDecimal("Consumo diario (libras/dia): ");
  
         reptil = new Reptil(nombre, edad, peso, escamas, venenoso, consumo);
+        
+        if (existeIdAnimal(reptil.getIdAnimal())) {
+            System.out.println("  ❌ El identificador es único para cada animal");
+            System.out.println("  El ID " + reptil.getIdAnimal() + " ya existe. Intente de nuevo.");
+            reptil = null;
+            registrarReptil();
+            return;
+        }
+        
         animales[totalAnimales] = reptil;
         totalAnimales++;
-        System.out.println("  Reptil registrado exitosamente!");
+        System.out.println("  ✓ Reptil registrado exitosamente!");
         reptil.mostrarInfo();
     }
  
-    // --- VER ANIMALES (Viejo) ---
+    // --- VER ANIMALES ---
     private static void verAnimales() {
         System.out.println("====== ANIMALES EN EL ZOOLOGICO ======");
         if (mamifero == null && ave == null && reptil == null) {
