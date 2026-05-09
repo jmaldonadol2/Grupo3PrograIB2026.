@@ -1,8 +1,8 @@
 package gt.edu.miumg.grupo3prograib2026;
 
 public abstract class Animal {
-    private static int contadorGlobalId = 0;
-    private int idAnimal;
+    private static long contadorGlobalId = 0;
+    private long idAnimal;
     private String nombre;
     private int edad;
     private double peso;
@@ -27,7 +27,7 @@ public abstract class Animal {
         this.consumoDiario = consumoDiario;
     }
 
-    // getters/setters (igual que ya los tienes)...
+    // getters/setters
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
     public int getEdad() { return edad; }
@@ -36,11 +36,12 @@ public abstract class Animal {
     public void setPeso(double peso) { this.peso = peso; }
     public double getConsumoDiario() { return consumoDiario; }
     public void setConsumoDiario(double consumoDiario) { this.consumoDiario = consumoDiario; }
-    public int getIdAnimal() { return idAnimal; }
+    public long getIdAnimal() { return idAnimal; }
 
     public abstract String emitirSonido();
     public abstract String moverse();
     public abstract String alimentarse();
+    public abstract String getDatoEspecifico();
 
     public void mostrarInfo() {
         System.out.println("=== DATOS DEL ANIMAL ===");
@@ -48,11 +49,13 @@ public abstract class Animal {
         System.out.println("Nombre: " + getNombre());
         System.out.println("Edad: " + getEdad() + " años");
         System.out.println("Peso: " + getPeso() + " kg");
+        System.out.println("Dato específico: " + getDatoEspecifico());
         if (getConsumoDiario() > 0) {
             System.out.println("Consumo diario: " + getConsumoDiario() + " libras/dia");
         }
         System.out.println("---------------------");
     }
+    
 //RECURSIVIDAD
     public double calcularConsumoRecursivo(int dias) {
         if (dias <= 0) return 0;

@@ -38,7 +38,6 @@ public class Reptil extends Animal {
         this.esVenenoso = esVenenoso;
     }
 
-    // Polimorfismo (obligatorios por Animal abstract)
     @Override
     public String emitirSonido() {
         return "Ssssss";
@@ -53,15 +52,22 @@ public class Reptil extends Animal {
     public String alimentarse() {
         return esVenenoso ? "Caza e inmoviliza con veneno" : "Caza y traga su presa";
     }
+    
+    @Override
+    public String getDatoEspecifico() {
+        return "Escamas: " + tipoEscamas + ", Venenoso: " + (esVenenoso ? "Sí" : "No");
+    }
 
     @Override
     public void mostrarInfo() {
         System.out.println("=== DATOS DEL REPTIL ===");
+        System.out.println("ID: " + getIdAnimal());
         System.out.println("Nombre: " + getNombre());
         System.out.println("Edad: " + getEdad() + " años");
         System.out.println("Peso: " + getPeso() + " kg");
         System.out.println("Tipo de escamas: " + tipoEscamas);
         System.out.println("Es venenoso?: " + (esVenenoso ? "Si" : "No"));
+        System.out.println("Dato específico: " + getDatoEspecifico());
         if (getConsumoDiario() > 0) {
             System.out.println("Consumo diario: " + getConsumoDiario() + " libras/dia");
         }

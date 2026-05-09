@@ -141,7 +141,7 @@ public class Grupo3PrograIB2026 {
     }
     
     // ============ VALIDACIÓN DE IDENTIFICADOR REPETIDO ============
-    private static boolean existeIdAnimal(int idBuscado) {
+    private static boolean existeIdAnimal(long idBuscado) {
         for (int i = 0; i < totalAnimales; i++) {
             if (animales[i].getIdAnimal() == idBuscado) {
                 return true;
@@ -253,7 +253,7 @@ public class Grupo3PrograIB2026 {
             return;
         }
         
-        int idBuscado = leerEntero("Ingrese el ID del animal a buscar: ");
+        long idBuscado = leerEntero("Ingrese el ID del animal a buscar: ");
         
         for (int i = 0; i < totalAnimales; i++) {
             if (animales[i].getIdAnimal() == idBuscado) {
@@ -303,6 +303,7 @@ public class Grupo3PrograIB2026 {
         System.out.println("  2. Descendente (mayor a menor ID)");
         int opcionOrden = leerEntero("Seleccione: ");
         
+        // Algoritmo de burbuja para ordenar por idAnimal
         for (int i = 0; i < totalAnimales - 1; i++) {
             for (int j = 0; j < totalAnimales - i - 1; j++) {
                 boolean debeIntercambiar;
@@ -323,7 +324,16 @@ public class Grupo3PrograIB2026 {
         
         String tipoOrden = (opcionOrden == 1) ? "ascendente" : "descendente";
         System.out.println("  Arreglo ordenado de forma " + tipoOrden + " por ID.");
-        mostrarTodosLosAnimales();
+        System.out.println("\n========== ANIMALES ORDENADOS ==========");
+        
+        // Mostrar animales ordenados con ID, nombre, años y dato específico
+        for (int i = 0; i < totalAnimales; i++) {
+            System.out.println("[" + (i + 1) + "] ID: " + animales[i].getIdAnimal() 
+                + " | Nombre: " + animales[i].getNombre() 
+                + " | Edad: " + animales[i].getEdad() + " años"
+                + " | " + animales[i].getDatoEspecifico());
+        }
+        System.out.println("=========================================\n");
     }
     
     // ============ MOSTRAR TODOS LOS ANIMALES ============

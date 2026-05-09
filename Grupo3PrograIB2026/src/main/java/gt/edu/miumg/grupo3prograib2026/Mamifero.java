@@ -28,7 +28,6 @@ public class Mamifero extends Animal {
     public int getNumeroPatas() { return numeroPatas; }
     public void setNumeroPatas(int numeroPatas) { this.numeroPatas = numeroPatas; }
 
-    // Polimorfismo (obligatorios por Animal abstract)
     @Override
     public String emitirSonido() { return "Guau guau"; }
 
@@ -37,15 +36,22 @@ public class Mamifero extends Animal {
 
     @Override
     public String alimentarse() { return "Se alimenta como mamifero"; }
+    
+    @Override
+    public String getDatoEspecifico() {
+        return "Pelaje: " + tipoPelaje + ", Patas: " + numeroPatas;
+    }
 
     @Override
     public void mostrarInfo() {
         System.out.println("=== DATOS DEL MAMIFERO ===");
+        System.out.println("ID: " + getIdAnimal());
         System.out.println("Nombre: " + getNombre());
         System.out.println("Edad: " + getEdad() + " años");
         System.out.println("Peso: " + getPeso() + " kg");
         System.out.println("Tipo de pelaje: " + tipoPelaje);
         System.out.println("Numero de patas: " + numeroPatas);
+        System.out.println("Dato específico: " + getDatoEspecifico());
         if (getConsumoDiario() > 0) {
             System.out.println("Consumo diario: " + getConsumoDiario() + " libras/dia");
         }

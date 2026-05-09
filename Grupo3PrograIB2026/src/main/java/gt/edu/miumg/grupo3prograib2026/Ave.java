@@ -38,7 +38,6 @@ public class Ave extends Animal {
         this.puedeVolar = puedeVolar;
     }
 
-    // Polimorfismo (obligatorios por Animal abstract)
     @Override
     public String emitirSonido() {
         return "Kii-kii";
@@ -55,15 +54,22 @@ public class Ave extends Animal {
     public String alimentarse() {
         return "Picotea su alimento";
     }
+    
+    @Override
+    public String getDatoEspecifico() {
+        return "Envergadura: " + envergaduraAlas + " cm, Vuela: " + (puedeVolar ? "Sí" : "No");
+    }
 
     @Override
     public void mostrarInfo() {
         System.out.println("=== DATOS DEL AVE ===");
+        System.out.println("ID: " + getIdAnimal());
         System.out.println("Nombre: " + getNombre());
         System.out.println("Edad: " + getEdad() + " años");
         System.out.println("Peso: " + getPeso() + " kg");
         System.out.println("Envergadura de alas: " + envergaduraAlas + " cm");
         System.out.println("Puede volar?: " + (puedeVolar ? "Si" : "No"));
+        System.out.println("Dato específico: " + getDatoEspecifico());
         if (getConsumoDiario() > 0) {
             System.out.println("Consumo diario: " + getConsumoDiario() + " libras/dia");
         }
