@@ -64,7 +64,7 @@ public class Reptil extends Animal {
         System.out.println("ID: " + getIdAnimal());
         System.out.println("Nombre: " + getNombre());
         System.out.println("Edad: " + getEdad() + " años");
-        System.out.println("Peso: " + getPeso() + " kg");
+        System.out.println("Peso: " + getPeso() + " Libras");
         System.out.println("Tipo de escamas: " + tipoEscamas);
         System.out.println("Es venenoso?: " + (esVenenoso ? "Si" : "No"));
         System.out.println("Dato específico: " + getDatoEspecifico());

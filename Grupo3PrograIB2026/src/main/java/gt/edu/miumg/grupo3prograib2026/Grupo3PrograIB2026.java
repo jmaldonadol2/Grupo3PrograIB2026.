@@ -162,7 +162,7 @@ public class Grupo3PrograIB2026 {
         System.out.println("-- Registro de Mamífero --");
         String nombre = leerTexto("Nombre: ");
         int edad = leerEntero("Edad (años): ");
-        double peso = leerDecimal("Peso (kg): ");
+        double peso = leerDecimal("Peso (Libras): ");
         String pelaje = leerTexto("Tipo de pelaje: ");
         int patas = leerEntero("Número de patas: ");
         double consumo = leerDecimal("Consumo diario (libras/dia): ");
@@ -193,7 +193,7 @@ public class Grupo3PrograIB2026 {
         System.out.println("-- Registro de Ave --");
         String nombre = leerTexto("Nombre: ");
         int edad = leerEntero("Edad (años): ");
-        double peso = leerDecimal("Peso (kg): ");
+        double peso = leerDecimal("Peso (Libras): ");
         double envergadura = leerDecimal("Envergadura de alas (cm): ");
         boolean vuela = leerBooleano("Puede volar? (s/n): ");
         double consumo = leerDecimal("Consumo diario (libras/dia): ");
@@ -224,7 +224,7 @@ public class Grupo3PrograIB2026 {
         System.out.println("-- Registro de Reptil --");
         String nombre = leerTexto("Nombre: ");
         int edad = leerEntero("Edad (años): ");
-        double peso = leerDecimal("Peso (kg): ");
+        double peso = leerDecimal("Peso (Libras): ");
         String escamas = leerTexto("Tipo de escamas: ");
         boolean venenoso = leerBooleano("Es venenoso? (s/n): ");
         double consumo = leerDecimal("Consumo diario (libras/dia): ");
@@ -470,7 +470,7 @@ public class Grupo3PrograIB2026 {
         System.out.println("-- Registro de Mamifero --");
         String nombre = leerTexto("Nombre: ");
         int edad = leerEntero("Edad (anos): ");
-        double peso = leerDecimal("Peso (kg): ");
+        double peso = leerDecimal("Peso (Libras): ");
         String pelaje = leerTexto("Tipo de pelaje: ");
         int patas = leerEntero("Numero de patas: ");
         double consumo = leerDecimal("Consumo diario (libras/dia): ");
@@ -506,7 +506,7 @@ public class Grupo3PrograIB2026 {
         System.out.println("-- Registro de Ave --");
         String nombre = leerTexto("Nombre: ");
         int edad = leerEntero("Edad (anos): ");
-        double peso = leerDecimal("Peso (kg): ");
+        double peso = leerDecimal("Peso (Libras): ");
         double envergadura = leerDecimal("Envergadura de alas (cm): ");
         boolean vuela = leerBooleano("Puede volar? (s/n): ");
         double consumo = leerDecimal("Consumo diario (libras/dia): ");
@@ -542,7 +542,7 @@ public class Grupo3PrograIB2026 {
         System.out.println("-- Registro de Reptil --");
         String nombre = leerTexto("Nombre: ");
         int edad = leerEntero("Edad (anos): ");
-        double peso = leerDecimal("Peso (kg): ");
+        double peso = leerDecimal("Peso (Libras): ");
         String escamas = leerTexto("Tipo de escamas: ");
         boolean venenoso = leerBooleano("Es venenoso? (s/n): ");
         double consumo = leerDecimal("Consumo diario (libras/dia): ");

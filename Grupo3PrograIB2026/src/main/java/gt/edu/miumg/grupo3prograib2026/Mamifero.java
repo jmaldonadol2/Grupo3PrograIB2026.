@@ -48,7 +48,7 @@ public class Mamifero extends Animal {
         System.out.println("ID: " + getIdAnimal());
         System.out.println("Nombre: " + getNombre());
         System.out.println("Edad: " + getEdad() + " años");
-        System.out.println("Peso: " + getPeso() + " kg");
+        System.out.println("Peso: " + getPeso() + " Libras");
         System.out.println("Tipo de pelaje: " + tipoPelaje);
         System.out.println("Numero de patas: " + numeroPatas);
         System.out.println("Dato específico: " + getDatoEspecifico());

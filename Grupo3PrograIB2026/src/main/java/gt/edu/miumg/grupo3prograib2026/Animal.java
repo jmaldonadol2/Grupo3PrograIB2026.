@@ -48,7 +48,7 @@ public abstract class Animal {
         System.out.println("ID: " + idAnimal);
         System.out.println("Nombre: " + getNombre());
         System.out.println("Edad: " + getEdad() + " años");
-        System.out.println("Peso: " + getPeso() + " kg");
+        System.out.println("Peso: " + getPeso() + " Libras");
         System.out.println("Dato específico: " + getDatoEspecifico());
         if (getConsumoDiario() > 0) {
             System.out.println("Consumo diario: " + getConsumoDiario() + " libras/dia");
